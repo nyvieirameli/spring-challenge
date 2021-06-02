@@ -9,6 +9,7 @@ import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.requests.UserR
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -24,17 +25,22 @@ public class UserDataProvider implements UserGateway {
 
     @Override
     public List<UserData> getAllUsers() {
-        return repository.findAll().stream()
-                .sorted()
-                .collect(Collectors.toList());
+        var users = repository.findAll();
+
+        Collections.sort(users);
+
+        return users;
     }
 
     @Override
     public List<UserData> getUsersByType(UserType type) {
-        return repository.findAll().stream()
-                .filter(u -> u.getType() == type.name())
-                .sorted()
+        var users = repository.findAll().stream()
+                .filter(u -> u.getType().equals(type.name()))
                 .collect(Collectors.toList());
+
+        Collections.sort(users);
+
+        return users;
     }
 
     @Override
@@ -56,7 +62,7 @@ public class UserDataProvider implements UserGateway {
     @Override
     public Long countUsersByType(UserType type) {
         return repository.findAll().stream()
-                .filter(u -> u.getType() == type.name())
+                .filter(u -> u.getType().equals(type.name()))
                 .count();
     }
 
@@ -93,5 +99,20 @@ public class UserDataProvider implements UserGateway {
         }
 
         repository.deleteById(id);
+    }
+
+    @Override
+    public void followSeller(UUID followerId, UUID followedId) {
+
+    }
+
+    @Override
+    public void unfollowSeller(UUID followerId, UUID followedId) {
+
+    }
+
+    @Override
+    public void countFollowers(UUID userId) {
+
     }
 }

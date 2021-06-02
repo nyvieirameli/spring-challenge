@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "User")
-public class UserData {
+public class UserData implements Comparable<UserData> {
 
     @Id
     private UUID id;
@@ -71,5 +71,10 @@ public class UserData {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public int compareTo(UserData o) {
+        return this.name.compareTo(o.getName());
     }
 }

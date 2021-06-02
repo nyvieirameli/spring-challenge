@@ -1,26 +1,23 @@
 package br.com.digitalhouse.bootcamp.sprintchallenge.usecases.services.implementations;
 
 import br.com.digitalhouse.bootcamp.sprintchallenge.dataproviders.repositories.entities.UserData;
-import br.com.digitalhouse.bootcamp.sprintchallenge.dataproviders.repositories.entities.enums.UserType;
 import br.com.digitalhouse.bootcamp.sprintchallenge.exceptions.BadRequestException;
 import br.com.digitalhouse.bootcamp.sprintchallenge.exceptions.NotFoundException;
 import br.com.digitalhouse.bootcamp.sprintchallenge.gateways.UserGateway;
 import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.requests.UserRequestDTO;
-import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.services.interfaces.UserService;
-import org.apache.tomcat.jni.Local;
+import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.services.interfaces.AdminService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 import java.util.UUID;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class AdminServiceImpl implements AdminService {
 
     UserGateway userGateway;
 
-    public UserServiceImpl(UserGateway userGateway) {
+    public AdminServiceImpl(UserGateway userGateway) {
         this.userGateway = userGateway;
     }
 
@@ -42,6 +39,11 @@ public class UserServiceImpl implements UserService {
         }
 
         return userGateway.getUser(id);
+    }
+
+    @Override
+    public Long countUsers() {
+        return userGateway.countUsers();
     }
 
     @Override

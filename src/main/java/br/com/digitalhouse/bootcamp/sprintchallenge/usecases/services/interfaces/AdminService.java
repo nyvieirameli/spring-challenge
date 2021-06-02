@@ -6,10 +6,11 @@ import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.requests.UserR
 import java.util.List;
 import java.util.UUID;
 
-public interface UserService {
+public interface AdminService {
 
-    public List<UserData> getAllUsers();
-    public UserData getUserById(UUID id);
-    public UserData createUser(UserRequestDTO request);
+    List<UserData> getAllUsers();
+    UserData getUserById(UUID id);
+    Long countUsers();
+    UserData createUser(UserRequestDTO request);
 
 }

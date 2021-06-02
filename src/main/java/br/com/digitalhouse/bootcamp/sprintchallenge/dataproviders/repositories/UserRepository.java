@@ -11,6 +11,4 @@ import java.util.UUID;
 @Repository
 public interface UserRepository extends JpaRepository<UserData, UUID> {
 
-//    List<UserData> findAllOrderByAsc();
-
 }

@@ -18,5 +18,7 @@ public interface UserGateway {
     UserData createUser(UserRequestDTO user);
     UserData updateUser(UUID id, String name, LocalDate birthdate, UserType userType);
     void deleteUser(UUID id);
-
+    void followSeller(UUID followerId, UUID followedId);
+    void unfollowSeller(UUID followerId, UUID followedId);
+    void countFollowers(UUID userId);
 }
