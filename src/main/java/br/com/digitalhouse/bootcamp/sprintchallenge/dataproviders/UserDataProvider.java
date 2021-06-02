@@ -6,12 +6,14 @@ import br.com.digitalhouse.bootcamp.sprintchallenge.dataproviders.repositories.e
 import br.com.digitalhouse.bootcamp.sprintchallenge.dataproviders.repositories.entities.enums.UserType;
 import br.com.digitalhouse.bootcamp.sprintchallenge.exceptions.NotFoundException;
 import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.requests.UserRequestDTO;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Service
 public class UserDataProvider implements UserGateway {
 
     UserRepository repository;
@@ -22,8 +24,7 @@ public class UserDataProvider implements UserGateway {
 
     @Override
     public List<UserData> getAllUsers() {
-        return repository.findAll()
-                .stream()
+        return repository.findAll().stream()
                 .sorted()
                 .collect(Collectors.toList());
     }
@@ -31,17 +32,17 @@ public class UserDataProvider implements UserGateway {
     @Override
     public List<UserData> getUsersByType(UserType type) {
         return repository.findAll().stream()
-                .filter(u -> u.getType() == type)
+                .filter(u -> u.getType() == type.name())
                 .sorted()
                 .collect(Collectors.toList());
     }
 
     @Override
     public UserData getUser(UUID id) {
-        var userData = repository.getById(id);
+        var userData = repository.findById(id);
 
-        if (userData != null) {
-            return userData;
+        if (userData.isPresent()) {
+            return userData.get();
         }
 
         throw new NotFoundException("User not found");
@@ -55,13 +56,13 @@ public class UserDataProvider implements UserGateway {
     @Override
     public Long countUsersByType(UserType type) {
         return repository.findAll().stream()
-                .filter(u -> u.getType() == type)
+                .filter(u -> u.getType() == type.name())
                 .count();
     }
 
     @Override
     public UserData createUser(UserRequestDTO request) {
-        var userData = new UserData(request.getName(), request.getCpf(), request.getBirthdate(), request.getType());
+        var userData = new UserData(request.getName(), request.getCpf(), request.getBirthdate(), request.getType().name());
         userData = repository.save(userData);
 
         return userData;
@@ -69,15 +70,16 @@ public class UserDataProvider implements UserGateway {
 
     @Override
     public UserData updateUser(UUID id, String name, LocalDate birthdate, UserType userType) {
-        var userData = repository.getById(id);
+        var optionalUser = repository.findById(id);
 
-        if (userData == null) {
+        if (optionalUser.isEmpty()) {
             throw new NotFoundException("User not found");
         }
 
+        var userData = optionalUser.get();
         userData.setName(name);
         userData.setBirthdate(birthdate);
-        userData.setType(userType);
+        userData.setType(userType.name());
 
         userData = repository.save(userData);
 

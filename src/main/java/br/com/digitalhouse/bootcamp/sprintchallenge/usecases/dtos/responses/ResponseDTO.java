@@ -9,17 +9,8 @@ public class ResponseDTO<T> {
     private String errorMessage;
     private T data;
 
-    public ResponseDTO(HttpStatus httpStatus, T data) {
-        this.httpStatus = httpStatus;
+    public ResponseDTO() {
         this.hasError = false;
-        this.data = data;
-    }
-
-    public ResponseDTO(HttpStatus httpStatus, String errorMessage, T data) {
-        this.httpStatus = httpStatus;
-        this.hasError = true;
-        this.errorMessage = errorMessage;
-        this.data = data;
     }
 
     public HttpStatus getHttpStatus() {
@@ -30,20 +21,17 @@ public class ResponseDTO<T> {
         this.httpStatus = httpStatus;
     }
 
+    public void setError(String errorMessage) {
+        this.errorMessage = errorMessage;
+        this.hasError = true;
+    }
+
     public boolean isHasError() {
         return hasError;
     }
 
-    public void setHasError(boolean hasError) {
-        this.hasError = hasError;
-    }
-
     public String getErrorMessage() {
         return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
     }
 
     public T getData() {

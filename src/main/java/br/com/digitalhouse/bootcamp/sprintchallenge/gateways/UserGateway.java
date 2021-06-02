@@ -10,13 +10,13 @@ import java.util.UUID;
 
 public interface UserGateway {
 
-    public List<UserData> getAllUsers();
-    public List<UserData> getUsersByType(UserType type);
-    public UserData getUser(UUID id);
-    public Long countUsers();
-    public Long countUsersByType(UserType type);
-    public UserData createUser(UserRequestDTO user);
-    public UserData updateUser(UUID id, String name, LocalDate birthdate, UserType userType);
-    public void deleteUser(UUID id);
+    List<UserData> getAllUsers();
+    List<UserData> getUsersByType(UserType type);
+    UserData getUser(UUID id);
+    Long countUsers();
+    Long countUsersByType(UserType type);
+    UserData createUser(UserRequestDTO user);
+    UserData updateUser(UUID id, String name, LocalDate birthdate, UserType userType);
+    void deleteUser(UUID id);
 
 }

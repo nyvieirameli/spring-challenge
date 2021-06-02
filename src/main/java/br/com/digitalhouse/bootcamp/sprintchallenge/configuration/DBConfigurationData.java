@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DBConfigurationData {
 
-    public DBService dbService;
+    private DBService dbService;
 
     public DBConfigurationData(DBService dbService) {
         this.dbService = dbService;

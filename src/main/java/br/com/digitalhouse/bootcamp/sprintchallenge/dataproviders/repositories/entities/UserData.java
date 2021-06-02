@@ -11,7 +11,6 @@ import java.util.UUID;
 public class UserData {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
     private String name;
@@ -21,10 +20,12 @@ public class UserData {
     @Column(name = "birthdate", columnDefinition = "DATE")
     private LocalDate birthdate;
 
-    @Column(name = "type", columnDefinition = "int")
-    private UserType type;
+    private String type;
 
-    public UserData(String name, String cpf, LocalDate birthdate, UserType type) {
+    public UserData() {
+    }
+
+    public UserData(String name, String cpf, LocalDate birthdate, String type) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.cpf = cpf;
@@ -64,11 +65,11 @@ public class UserData {
         this.birthdate = birthdate;
     }
 
-    public UserType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(UserType type) {
+    public void setType(String type) {
         this.type = type;
     }
 }
