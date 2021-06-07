@@ -1,6 +1,6 @@
 package br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.requests;
 
-import br.com.digitalhouse.bootcamp.sprintchallenge.dataproviders.repositories.entities.enums.UserType;
+import br.com.digitalhouse.bootcamp.sprintchallenge.dataproviders.repositories.entities.helpers.UserType;
 
 import java.time.LocalDate;
 

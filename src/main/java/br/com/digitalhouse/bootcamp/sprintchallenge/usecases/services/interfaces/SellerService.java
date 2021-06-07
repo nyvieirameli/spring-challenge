@@ -12,4 +12,7 @@ public interface SellerService {
     void followAnotherSeller(UUID followerId, UUID followedId);
     void unfollowAnotherSeller(UUID followerId, UUID followedId);
     Long countFollowers(UUID userId);
+    List<UserData> getFollowers(UUID userId);
+    List<UserData> getFollowing(UUID userId);
+    Long countFollowing(UUID userId);
 }

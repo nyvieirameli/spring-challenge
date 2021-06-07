@@ -1,9 +1,11 @@
 package br.com.digitalhouse.bootcamp.sprintchallenge.dataproviders.repositories.entities;
 
-import br.com.digitalhouse.bootcamp.sprintchallenge.dataproviders.repositories.entities.enums.UserType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -21,6 +23,17 @@ public class UserData implements Comparable<UserData> {
     private LocalDate birthdate;
 
     private String type;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "relation",
+            joinColumns = @JoinColumn(name = "followerId"),
+            inverseJoinColumns = @JoinColumn(name = "followingId")
+    )
+    private List<UserData> following;
+
+    @ManyToMany(mappedBy = "following")
+    private List<UserData> followers;
 
     public UserData() {
     }
@@ -71,6 +84,36 @@ public class UserData implements Comparable<UserData> {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @JsonIgnore
+    public List<UserData> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(UserData following) {
+        if (this.following == null) {
+            this.following = new ArrayList<>();
+        }
+
+        this.following.add(following);
+    }
+
+    public void setFollowers(List<UserData> followers) {
+        this.followers = followers;
+    }
+
+    @JsonIgnore
+    public List<UserData> getFollowers() {
+        return followers;
+    }
+
+    public void setFollower(UserData follower) {
+        if (this.followers == null) {
+            this.followers = new ArrayList<>();
+        }
+
+        this.followers.add(follower);
     }
 
     @Override

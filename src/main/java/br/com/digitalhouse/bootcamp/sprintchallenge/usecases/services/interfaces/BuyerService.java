@@ -12,5 +12,7 @@ public interface BuyerService {
     Long countBuyers();
     void followSeller(UUID buyerId, UUID sellerId);
     void unfollowSeller(UUID buyerId, UUID sellerId);
+    List<UserData> getFollowing(UUID userId);
+    Long countFollowing(UUID userId);
 
 }

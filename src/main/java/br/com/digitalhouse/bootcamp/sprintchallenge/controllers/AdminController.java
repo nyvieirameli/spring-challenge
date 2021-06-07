@@ -16,11 +16,11 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
-public class UserController {
+public class AdminController {
 
     AdminService adminService;
 
-    public UserController(AdminService adminService) {
+    public AdminController(AdminService adminService) {
         this.adminService = adminService;
     }
 

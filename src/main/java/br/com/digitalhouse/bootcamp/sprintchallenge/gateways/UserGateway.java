@@ -1,7 +1,7 @@
 package br.com.digitalhouse.bootcamp.sprintchallenge.gateways;
 
 import br.com.digitalhouse.bootcamp.sprintchallenge.dataproviders.repositories.entities.UserData;
-import br.com.digitalhouse.bootcamp.sprintchallenge.dataproviders.repositories.entities.enums.UserType;
+import br.com.digitalhouse.bootcamp.sprintchallenge.dataproviders.repositories.entities.helpers.UserType;
 import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.requests.UserRequestDTO;
 
 import java.time.LocalDate;
@@ -20,5 +20,8 @@ public interface UserGateway {
     void deleteUser(UUID id);
     void followSeller(UUID followerId, UUID followedId);
     void unfollowSeller(UUID followerId, UUID followedId);
-    void countFollowers(UUID userId);
+    List<UserData> getFollowers(UUID userId);
+    Long countFollowers(UUID userId);
+    List<UserData> getFollowing(UUID userId);
+    Long countFollowing(UUID userId);
 }
