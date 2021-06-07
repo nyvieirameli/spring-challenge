@@ -3,12 +3,13 @@ package br.com.digitalhouse.bootcamp.sprintchallenge.dataproviders.repositories.
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "ProductBrand")
-public class ProductBrandData {
+public class ProductBrandData implements Comparable<ProductBrandData>{
 
     @Id
     private UUID id;
@@ -19,6 +20,12 @@ public class ProductBrandData {
     private List<ProductData> products;
 
     public ProductBrandData() {
+    }
+
+    public ProductBrandData(String name) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+        products = new ArrayList<>();
     }
 
     public UUID getId() {
@@ -44,5 +51,10 @@ public class ProductBrandData {
 
     public void setProducts(List<ProductData> products) {
         this.products = products;
+    }
+
+    @Override
+    public int compareTo(ProductBrandData o) {
+        return this.name.compareTo(o.getName());
     }
 }

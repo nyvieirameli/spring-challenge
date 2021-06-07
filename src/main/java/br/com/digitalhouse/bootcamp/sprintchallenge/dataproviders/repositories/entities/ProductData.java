@@ -1,6 +1,9 @@
 package br.com.digitalhouse.bootcamp.sprintchallenge.dataproviders.repositories.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,6 +39,7 @@ public class ProductData implements Comparable<ProductData> {
         this.notes = notes;
         this.brand = brand;
         this.type = type;
+        this.posts = new ArrayList<>();
     }
 
     public UUID getId() {
@@ -86,6 +90,7 @@ public class ProductData implements Comparable<ProductData> {
         this.type = type;
     }
 
+    @JsonIgnore
     public List<ProductPostData> getPosts() {
         return posts;
     }
