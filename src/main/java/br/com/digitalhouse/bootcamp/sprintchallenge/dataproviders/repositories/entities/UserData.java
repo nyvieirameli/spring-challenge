@@ -26,7 +26,7 @@ public class UserData implements Comparable<UserData> {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "relation",
+            name = "UserFollower",
             joinColumns = @JoinColumn(name = "followerId"),
             inverseJoinColumns = @JoinColumn(name = "followingId")
     )
