@@ -35,6 +35,9 @@ public class UserData implements Comparable<UserData> {
     @ManyToMany(mappedBy = "following")
     private List<UserData> followers;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<ProductData> products;
+
     public UserData() {
     }
 
@@ -114,6 +117,15 @@ public class UserData implements Comparable<UserData> {
         }
 
         this.followers.add(follower);
+    }
+
+    @JsonIgnore
+    public List<ProductData> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductData> products) {
+        this.products = products;
     }
 
     @Override

@@ -21,6 +21,9 @@ public class ProductData implements Comparable<ProductData> {
     private String notes;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private UserData user;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private ProductBrandData brand;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -32,11 +35,12 @@ public class ProductData implements Comparable<ProductData> {
     public ProductData() {
     }
 
-    public ProductData(String name, String color, String notes, ProductBrandData brand, ProductTypeData type) {
+    public ProductData(String name, String color, String notes, UserData user, ProductBrandData brand, ProductTypeData type) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.color = color;
         this.notes = notes;
+        this.user = user;
         this.brand = brand;
         this.type = type;
         this.posts = new ArrayList<>();
@@ -72,6 +76,14 @@ public class ProductData implements Comparable<ProductData> {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public UserData getUser() {
+        return user;
+    }
+
+    public void setUser(UserData user) {
+        this.user = user;
     }
 
     public ProductBrandData getBrand() {

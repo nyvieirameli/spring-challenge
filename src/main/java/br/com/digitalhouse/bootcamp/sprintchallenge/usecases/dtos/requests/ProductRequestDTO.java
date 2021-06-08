@@ -14,15 +14,18 @@ public class ProductRequestDTO {
 
     private UUID productTypeId;
 
+    private UUID userId;
+
     public ProductRequestDTO(){
     }
 
-    public ProductRequestDTO(String name, String color, String notes, UUID productBrandId, UUID productTypeId) {
+    public ProductRequestDTO(String name, String color, String notes, UUID productBrandId, UUID productTypeId, UUID userId) {
         this.name = name;
         this.color = color;
         this.notes = notes;
         this.productBrandId = productBrandId;
         this.productTypeId = productTypeId;
+        this.userId = userId;
     }
 
     public String getName() {
@@ -63,5 +66,13 @@ public class ProductRequestDTO {
 
     public void setProductTypeId(UUID productTypeId) {
         this.productTypeId = productTypeId;
+    }
+
+    public UUID getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
 }

@@ -2,6 +2,7 @@ package br.com.digitalhouse.bootcamp.sprintchallenge.dataproviders.repositories.
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -11,8 +12,8 @@ public class ProductPostData implements Comparable<ProductPostData>{
     @Id
     private UUID id;
 
-    @Column(name = "date", columnDefinition = "DATE")
-    private LocalDate date;
+    @Column(name = "date", columnDefinition = "DATETIME")
+    private LocalDateTime date;
 
     private Integer category;
 
@@ -30,14 +31,24 @@ public class ProductPostData implements Comparable<ProductPostData>{
     public ProductPostData() {
     }
 
-    public ProductPostData(LocalDate date, Integer category, Double price, Integer quantity) {
+    public ProductPostData(Integer category, Double price, Integer quantity) {
         this.id = UUID.randomUUID();
-        this.date = date;
+        this.date = LocalDateTime.now();
         this.category = category;
         this.price = price;
         this.quantity = quantity;
         this.hasPromo = false;
         this.discount = 0.0;
+    }
+
+    public ProductPostData(Integer category, Double price, Integer quantity, Double discount) {
+        this.id = UUID.randomUUID();
+        this.date = LocalDateTime.now();
+        this.category = category;
+        this.price = price;
+        this.quantity = quantity;
+        this.hasPromo = true;
+        this.discount = discount;
     }
 
     public UUID getId() {
@@ -48,11 +59,11 @@ public class ProductPostData implements Comparable<ProductPostData>{
         this.id = id;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
