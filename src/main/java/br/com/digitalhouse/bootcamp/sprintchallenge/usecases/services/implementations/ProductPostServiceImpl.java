@@ -86,8 +86,10 @@ public class ProductPostServiceImpl implements ProductPostService {
     }
 
     @Override
-    public List<ProductPostData> getProductPostsByFollowedUsersByUserId(UUID userId) {
-        var posts = gateway.getProductPostsByFollowedUsersByUserId(userId);
+    public List<ProductPostData> getProductPostsByFollowedUsersByUserId(UUID userId, String order) {
+        order = (order == null || order.isBlank()) ? "date-desc" : order;
+
+        var posts = gateway.getProductPostsByFollowedUsersByUserId(userId, order);
 
         if (posts == null || posts.size() == 0) {
             throw new NotFoundException("List is empty");

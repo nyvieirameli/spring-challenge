@@ -185,11 +185,13 @@ public class ProductPostController {
     }
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<ResponseDTO<List<ProductPostData>>> findProductPostsByFollowedUsersByUserId(@PathVariable UUID userId) {
+    public ResponseEntity<ResponseDTO<List<ProductPostData>>> findProductPostsByFollowedUsersByUserId(
+            @PathVariable UUID userId,
+            @RequestParam(value = "order", required = false) String order) {
         var response = new ResponseDTO<List<ProductPostData>>();
 
         try {
-            var posts = postService.getProductPostsByFollowedUsersByUserId(userId);
+            var posts = postService.getProductPostsByFollowedUsersByUserId(userId, order);
 
             response.setData(posts);
             response.setHttpStatus(HttpStatus.OK);

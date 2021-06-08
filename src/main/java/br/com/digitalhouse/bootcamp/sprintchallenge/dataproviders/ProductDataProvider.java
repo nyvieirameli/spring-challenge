@@ -197,7 +197,7 @@ public class ProductDataProvider implements ProductGateway {
     }
 
     @Override
-    public List<ProductPostData> getProductPostsByFollowedUsersByUserId(UUID userId) {
+    public List<ProductPostData> getProductPostsByFollowedUsersByUserId(UUID userId, String order) {
         var optionalUser = userRepository.findById(userId);
         if (optionalUser.isEmpty()) {
             throw new NotFoundException("User not found");
@@ -206,7 +206,6 @@ public class ProductDataProvider implements ProductGateway {
         var user = optionalUser.get();
 
         var followeds = user.getFollowing();
-
 
         var response = followeds.stream()
                 .flatMap(f -> f.getProducts().stream()
@@ -218,7 +217,10 @@ public class ProductDataProvider implements ProductGateway {
         response = response.stream().filter(p -> p.getDate().isAfter(ChronoLocalDateTime.from(weeksAgo))).collect(Collectors.toList());
 
         Collections.sort(response);
-        Collections.reverse(response);
+
+        if (!order.contains("asc")) {
+            Collections.reverse(response);
+        }
 
         return response;
     }

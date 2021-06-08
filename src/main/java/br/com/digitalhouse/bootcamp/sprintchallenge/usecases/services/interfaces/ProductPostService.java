@@ -13,7 +13,7 @@ public interface ProductPostService {
     ProductPostData createNewProductPost(ProductPostRequestDTO request);
     ProductPostData updateProductPostById(ProductPostRequestDTO request, UUID id);
     List<ProductPostData> getProductPostsByUser(UUID userId);
-    List<ProductPostData> getProductPostsByFollowedUsersByUserId(UUID userId);
+    List<ProductPostData> getProductPostsByFollowedUsersByUserId(UUID userId, String order);
     List<ProductPostData> getPromoProductPostsByUser(UUID userId);
     Long countPromoProductPostsByUser(UUID userId);
 }

@@ -23,6 +23,6 @@ public interface ProductGateway {
     ProductPostData createNewProductPost(ProductPostData postData, UUID productId);
     ProductPostData updateProductPostById(ProductPostRequestDTO request, UUID id);
     List<ProductPostData> getProductPostsByUser(UUID userId);
-    List<ProductPostData> getProductPostsByFollowedUsersByUserId(UUID userId);
+    List<ProductPostData> getProductPostsByFollowedUsersByUserId(UUID userId, String order);
     Long countPromoProductPostsByUser(UUID userId);
 }
