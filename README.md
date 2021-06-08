@@ -8,7 +8,8 @@ Desafio prático do bootcamp, módulo 8, SocialMeli. O objetivo é: testar tudo 
 ```
  git clone git@github.com:nyvieirameli/spring-challenge.git
 ```
-2. rodar o projeto pelo IntelliJ IDEA
+2. Rodar o projeto pelo IntelliJ IDEA.
+3. Ao iniciar o projeto será inserido nas tabelas alguns elementos, são eles: 2 compradores, 3 vendedores, 2 marcas, 2 tipos de produtos, 2 produtos e 2 posts de cada produto. 
 
 ## Modelagem
 A modelagem pode ser encontrada acessando o link: https://tinyurl.com/266dekef
