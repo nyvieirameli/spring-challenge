@@ -5,7 +5,6 @@ import br.com.digitalhouse.bootcamp.sprintchallenge.exceptions.BadRequestExcepti
 import br.com.digitalhouse.bootcamp.sprintchallenge.exceptions.NotFoundException;
 import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.requests.ProductPostRequestDTO;
 import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.responses.ResponseDTO;
-import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.responses.UserWithPostsResponseDTO;
 import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.services.interfaces.ProductPostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -186,8 +185,8 @@ public class ProductPostController {
     }
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<ResponseDTO<List<UserWithPostsResponseDTO>>> findProductPostsByFollowedUsersByUserId(@PathVariable UUID userId) {
-        var response = new ResponseDTO<List<UserWithPostsResponseDTO>>();
+    public ResponseEntity<ResponseDTO<List<ProductPostData>>> findProductPostsByFollowedUsersByUserId(@PathVariable UUID userId) {
+        var response = new ResponseDTO<List<ProductPostData>>();
 
         try {
             var posts = postService.getProductPostsByFollowedUsersByUserId(userId);

@@ -23,11 +23,11 @@ public class BuyerController {
     }
 
     @GetMapping
-    public ResponseEntity<ResponseDTO<List<UserData>>> findAllBuyers() {
+    public ResponseEntity<ResponseDTO<List<UserData>>> findAllBuyers(@RequestParam(value = "order", required = false) String order) {
         var response = new ResponseDTO<List<UserData>>();
 
         try {
-            var users = buyerService.getAllBuyers();
+            var users = buyerService.getAllBuyers(order);
 
             response.setData(users);
             response.setHttpStatus(HttpStatus.OK);
@@ -126,11 +126,11 @@ public class BuyerController {
     }
 
     @GetMapping("/{userId}/following")
-    public ResponseEntity<ResponseDTO<List<UserData>>> getFollowing(@PathVariable UUID userId) {
+    public ResponseEntity<ResponseDTO<List<UserData>>> getFollowing(@PathVariable UUID userId, @RequestParam(value = "order", required = false) String order) {
         var response = new ResponseDTO<List<UserData>>();
 
         try {
-            var following = buyerService.getFollowing(userId);
+            var following = buyerService.getFollowing(userId, order);
 
             response.setData(following);
             response.setHttpStatus(HttpStatus.OK);

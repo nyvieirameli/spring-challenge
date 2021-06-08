@@ -13,10 +13,13 @@ import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.requests.Produ
 import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.requests.ProductBrandRequestDTO;
 import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.requests.ProductRequestDTO;
 import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.requests.ProductTypeRequestDTO;
-import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.responses.UserWithPostsResponseDTO;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -194,7 +197,7 @@ public class ProductDataProvider implements ProductGateway {
     }
 
     @Override
-    public List<UserWithPostsResponseDTO> getProductPostsByFollowedUsersByUserId(UUID userId) {
+    public List<ProductPostData> getProductPostsByFollowedUsersByUserId(UUID userId) {
         var optionalUser = userRepository.findById(userId);
         if (optionalUser.isEmpty()) {
             throw new NotFoundException("User not found");
@@ -204,14 +207,18 @@ public class ProductDataProvider implements ProductGateway {
 
         var followeds = user.getFollowing();
 
-        var response = new ArrayList<UserWithPostsResponseDTO>();
-        for (var followed : followeds) {
-            var posts = followed.getProducts().stream()
-                    .flatMap(products -> products.getPosts().stream())
-                    .collect(Collectors.toList());
 
-            response.add(new UserWithPostsResponseDTO(followed, posts));
-        }
+        var response = followeds.stream()
+                .flatMap(f -> f.getProducts().stream()
+                .flatMap(products -> products.getPosts().stream()))
+                .collect(Collectors.toList());
+
+        var weeksAgo = (LocalDateTime.now().minusDays(14));
+
+        response = response.stream().filter(p -> p.getDate().isAfter(ChronoLocalDateTime.from(weeksAgo))).collect(Collectors.toList());
+
+        Collections.sort(response);
+        Collections.reverse(response);
 
         return response;
     }

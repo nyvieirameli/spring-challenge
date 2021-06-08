@@ -23,11 +23,11 @@ public class SellerController {
     }
 
     @GetMapping
-    public ResponseEntity<ResponseDTO<List<UserData>>> findAllSellers() {
+    public ResponseEntity<ResponseDTO<List<UserData>>> findAllSellers(@RequestParam(value = "order", required = false) String order) {
         var response = new ResponseDTO<List<UserData>>();
 
         try {
-            var users = sellerService.getAllSellers();
+            var users = sellerService.getAllSellers(order);
 
             response.setData(users);
             response.setHttpStatus(HttpStatus.OK);
@@ -126,11 +126,11 @@ public class SellerController {
     }
 
     @GetMapping("/{userId}/followers/list")
-    public ResponseEntity<ResponseDTO<List<UserData>>> getFollowers(@PathVariable UUID userId) {
+    public ResponseEntity<ResponseDTO<List<UserData>>> getFollowers(@PathVariable UUID userId, @RequestParam(value = "order", required = false) String order) {
         var response = new ResponseDTO<List<UserData>>();
 
         try {
-            var followers = sellerService.getFollowers(userId);
+            var followers = sellerService.getFollowers(userId, order);
 
             response.setData(followers);
             response.setHttpStatus(HttpStatus.OK);
@@ -176,11 +176,11 @@ public class SellerController {
     }
 
     @GetMapping("/{userId}/following")
-    public ResponseEntity<ResponseDTO<List<UserData>>> getFollowing(@PathVariable UUID userId) {
+    public ResponseEntity<ResponseDTO<List<UserData>>> getFollowing(@PathVariable UUID userId, @RequestParam(value = "order", required = false) String order) {
         var response = new ResponseDTO<List<UserData>>();
 
         try {
-            var following = sellerService.getFollowing(userId);
+            var following = sellerService.getFollowing(userId, order);
 
             response.setData(following);
             response.setHttpStatus(HttpStatus.OK);

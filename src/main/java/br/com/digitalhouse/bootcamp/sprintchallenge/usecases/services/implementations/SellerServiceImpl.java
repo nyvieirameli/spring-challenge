@@ -20,8 +20,10 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public List<UserData> getAllSellers() {
-        return userGateway.getUsersByType(UserType.SELLER);
+    public List<UserData> getAllSellers(String order) {
+        order = (order == null || order.isBlank()) ? "name-asc" : order;
+
+        return userGateway.getUsersByType(UserType.SELLER, order);
     }
 
     @Override
@@ -31,7 +33,7 @@ public class SellerServiceImpl implements SellerService {
 
     @Override
     public void followAnotherSeller(UUID followerId, UUID followedId) {
-        var following = userGateway.getFollowing(followerId);
+        var following = userGateway.getFollowing(followerId, "name-asc");
 
         var exists = following.stream().filter(f -> f.getId().equals(followedId)).count();
         if (exists > 0) {
@@ -43,7 +45,7 @@ public class SellerServiceImpl implements SellerService {
 
     @Override
     public void unfollowAnotherSeller(UUID followerId, UUID followedId) {
-        var following = userGateway.getFollowing(followerId);
+        var following = userGateway.getFollowing(followerId, "name-asc");
 
         var exists = following.stream().filter(f -> f.getId().equals(followedId)).count();
         if (exists == 0) {
@@ -59,13 +61,17 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public List<UserData> getFollowers(UUID userId) {
-        return userGateway.getFollowers(userId);
+    public List<UserData> getFollowers(UUID userId, String order) {
+        order = (order == null || order.isBlank()) ? "name-asc" : order;
+
+        return userGateway.getFollowers(userId, order);
     }
 
     @Override
-    public List<UserData> getFollowing(UUID userId) {
-        return userGateway.getFollowing(userId);
+    public List<UserData> getFollowing(UUID userId, String order) {
+        order = (order == null || order.isBlank()) ? "name-asc" : order;
+
+        return userGateway.getFollowing(userId, order);
     }
 
     @Override

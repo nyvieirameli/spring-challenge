@@ -23,21 +23,29 @@ public class UserDataProvider implements UserGateway {
     }
 
     @Override
-    public List<UserData> getAllUsers() {
+    public List<UserData> getAllUsers(String order) {
         var users = userRepository.findAll();
 
         Collections.sort(users);
+
+        if (order.contains("desc")){
+            Collections.reverse(users);
+        }
 
         return users;
     }
 
     @Override
-    public List<UserData> getUsersByType(UserType type) {
+    public List<UserData> getUsersByType(UserType type, String order) {
         var users = userRepository.findAll().stream()
                 .filter(u -> u.getType().equals(type.name()))
                 .collect(Collectors.toList());
 
         Collections.sort(users);
+
+        if (order.contains("desc")){
+            Collections.reverse(users);
+        }
 
         return users;
     }
@@ -139,14 +147,22 @@ public class UserDataProvider implements UserGateway {
     }
 
     @Override
-    public List<UserData> getFollowers(UUID userId) {
+    public List<UserData> getFollowers(UUID userId, String order) {
         var user = userRepository.findById(userId);
 
         if (user.isEmpty() || !user.get().getType().equals(UserType.SELLER.name())) {
             throw new BadRequestException("User is invalid");
         }
 
-        return user.get().getFollowers();
+        var users = user.get().getFollowers();
+
+        Collections.sort(users);
+
+        if (order.contains("desc")){
+            Collections.reverse(users);
+        }
+
+        return users;
     }
 
     @Override
@@ -161,14 +177,22 @@ public class UserDataProvider implements UserGateway {
     }
 
     @Override
-    public List<UserData> getFollowing(UUID userId) {
+    public List<UserData> getFollowing(UUID userId, String order) {
         var user = userRepository.findById(userId);
 
         if (user.isEmpty()) {
             throw new BadRequestException("User is invalid");
         }
 
-        return user.get().getFollowing();
+        var users = user.get().getFollowing();
+
+        Collections.sort(users);
+
+        if (order.contains("desc")){
+            Collections.reverse(users);
+        }
+
+        return users;
     }
 
     @Override

@@ -5,7 +5,6 @@ import br.com.digitalhouse.bootcamp.sprintchallenge.exceptions.BadRequestExcepti
 import br.com.digitalhouse.bootcamp.sprintchallenge.exceptions.NotFoundException;
 import br.com.digitalhouse.bootcamp.sprintchallenge.gateways.ProductGateway;
 import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.requests.ProductPostRequestDTO;
-import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.responses.UserWithPostsResponseDTO;
 import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.services.interfaces.ProductPostService;
 import org.springframework.stereotype.Service;
 
@@ -87,7 +86,7 @@ public class ProductPostServiceImpl implements ProductPostService {
     }
 
     @Override
-    public List<UserWithPostsResponseDTO> getProductPostsByFollowedUsersByUserId(UUID userId) {
+    public List<ProductPostData> getProductPostsByFollowedUsersByUserId(UUID userId) {
         var posts = gateway.getProductPostsByFollowedUsersByUserId(userId);
 
         if (posts == null || posts.size() == 0) {

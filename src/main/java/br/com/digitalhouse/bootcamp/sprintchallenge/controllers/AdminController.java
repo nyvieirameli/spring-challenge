@@ -25,11 +25,11 @@ public class AdminController {
     }
 
     @GetMapping
-    public ResponseEntity<ResponseDTO<List<UserData>>> findAllUsers() {
+    public ResponseEntity<ResponseDTO<List<UserData>>> findAllUsers(@RequestParam(value = "order", required = false) String order) {
         var response = new ResponseDTO<List<UserData>>();
 
         try {
-            var users = adminService.getAllUsers();
+            var users = adminService.getAllUsers(order);
 
             response.setData(users);
             response.setHttpStatus(HttpStatus.OK);

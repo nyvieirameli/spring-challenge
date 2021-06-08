@@ -21,8 +21,10 @@ public class BuyerServiceImpl implements BuyerService {
     }
 
     @Override
-    public List<UserData> getAllBuyers() {
-        var buyers = userGateway.getUsersByType(UserType.BUYER);
+    public List<UserData> getAllBuyers(String order) {
+        order = (order == null || order.isBlank()) ? "name-asc" : order;
+
+        var buyers = userGateway.getUsersByType(UserType.BUYER, order);
 
         if (buyers == null || buyers.size() == 0) {
             throw new NotFoundException("List is empty");
@@ -38,7 +40,7 @@ public class BuyerServiceImpl implements BuyerService {
 
     @Override
     public void followSeller(UUID buyerId, UUID sellerId) {
-        var following = userGateway.getFollowing(buyerId);
+        var following = userGateway.getFollowing(buyerId, "name-asc");
 
         var exists = following.stream().filter(f -> f.getId().equals(sellerId)).count();
         if (exists > 0) {
@@ -50,7 +52,7 @@ public class BuyerServiceImpl implements BuyerService {
 
     @Override
     public void unfollowSeller(UUID buyerId, UUID sellerId) {
-        var following = userGateway.getFollowing(buyerId);
+        var following = userGateway.getFollowing(buyerId, "name-asc");
 
         var exists = following.stream().filter(f -> f.getId().equals(sellerId)).count();
         if (exists == 0) {
@@ -61,8 +63,10 @@ public class BuyerServiceImpl implements BuyerService {
     }
 
     @Override
-    public List<UserData> getFollowing(UUID userId) {
-        var following = userGateway.getFollowing(userId);
+    public List<UserData> getFollowing(UUID userId, String order) {
+        order = (order == null || order.isBlank()) ? "name-asc" : order;
+
+        var following = userGateway.getFollowing(userId, order);
 
         if (following == null || following.size() == 0) {
             throw new NotFoundException("List is empty");

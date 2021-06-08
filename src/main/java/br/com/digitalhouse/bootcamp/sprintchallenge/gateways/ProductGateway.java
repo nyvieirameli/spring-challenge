@@ -8,7 +8,6 @@ import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.requests.Produ
 import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.requests.ProductBrandRequestDTO;
 import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.requests.ProductRequestDTO;
 import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.requests.ProductTypeRequestDTO;
-import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.responses.UserWithPostsResponseDTO;
 
 import java.util.List;
 import java.util.UUID;
@@ -24,6 +23,6 @@ public interface ProductGateway {
     ProductPostData createNewProductPost(ProductPostData postData, UUID productId);
     ProductPostData updateProductPostById(ProductPostRequestDTO request, UUID id);
     List<ProductPostData> getProductPostsByUser(UUID userId);
-    List<UserWithPostsResponseDTO> getProductPostsByFollowedUsersByUserId(UUID userId);
+    List<ProductPostData> getProductPostsByFollowedUsersByUserId(UUID userId);
     Long countPromoProductPostsByUser(UUID userId);
 }

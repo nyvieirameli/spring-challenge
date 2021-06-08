@@ -10,8 +10,8 @@ import java.util.UUID;
 
 public interface UserGateway {
 
-    List<UserData> getAllUsers();
-    List<UserData> getUsersByType(UserType type);
+    List<UserData> getAllUsers(String order);
+    List<UserData> getUsersByType(UserType type, String order);
     UserData getUser(UUID id);
     Long countUsers();
     Long countUsersByType(UserType type);
@@ -20,8 +20,8 @@ public interface UserGateway {
     void deleteUser(UUID id);
     void followSeller(UUID followerId, UUID followedId);
     void unfollowSeller(UUID followerId, UUID followedId);
-    List<UserData> getFollowers(UUID userId);
+    List<UserData> getFollowers(UUID userId, String order);
     Long countFollowers(UUID userId);
-    List<UserData> getFollowing(UUID userId);
+    List<UserData> getFollowing(UUID userId, String order);
     Long countFollowing(UUID userId);
 }

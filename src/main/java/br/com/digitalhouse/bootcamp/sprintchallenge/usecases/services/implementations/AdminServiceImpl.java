@@ -22,8 +22,10 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<UserData> getAllUsers() {
-        var users = userGateway.getAllUsers();
+    public List<UserData> getAllUsers(String order) {
+        order = (order == null || order.isBlank()) ? "name-asc" : order;
+
+        var users = userGateway.getAllUsers(order);
 
         if (users == null || users.size() == 0) {
             throw new NotFoundException("List is empty");

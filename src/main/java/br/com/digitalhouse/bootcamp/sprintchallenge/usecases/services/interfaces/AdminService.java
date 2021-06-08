@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface AdminService {
 
-    List<UserData> getAllUsers();
+    List<UserData> getAllUsers(String order);
     UserData getUserById(UUID id);
     Long countUsers();
     UserData createUser(UserRequestDTO request);
