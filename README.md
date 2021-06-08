@@ -13,6 +13,16 @@ Desafio prático do bootcamp, módulo 8, SocialMeli. O objetivo é: testar tudo 
 ## Modelagem
 A modelagem pode ser encontrada acessando o link: https://tinyurl.com/266dekef
 
+## Documentação completa
+Para uma visão de todas as chamadas disponíveis para uso, acesse a documentação completa através do link: https://documenter.getpostman.com/view/15849644/TzY3Bb1T
+
+## Collection de exemplo
+Devido a complexidade das chamadas e modelagens, o uso de nossa Collection criada pelo Postman com chamadas exemplo e variáveis já atribuídas ao fazer a requisição, possa facilitar o entendimento do projeto.
+Para cloná-la, vá ao site https://www.postman.com/ ou abra seu aplicativo e importe o seguinte link:
+```
+https://www.getpostman.com/collections/c7c867f051b489b5c207
+```
+
 ## Casos de Uso
 
 ### US0001 - Ser capaz de realizar a ação de “Follow” (seguir) a um determinado vendedor
