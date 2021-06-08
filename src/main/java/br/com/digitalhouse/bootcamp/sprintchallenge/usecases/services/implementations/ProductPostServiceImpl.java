@@ -8,6 +8,7 @@ import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.dtos.requests.Produ
 import br.com.digitalhouse.bootcamp.sprintchallenge.usecases.services.interfaces.ProductPostService;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -22,11 +23,19 @@ public class ProductPostServiceImpl implements ProductPostService {
     }
 
     @Override
-    public List<ProductPostData> getAllProductPosts() {
+    public List<ProductPostData> getAllProductPosts(String order) {
+        order = (order == null || order.isBlank()) ? "date-desc" : order;
+
         var posts = gateway.getAll(new ProductPostData());
 
         if (posts == null || posts.size() == 0) {
             throw new NotFoundException("List is empty");
+        }
+
+        Collections.sort(posts);
+
+        if (!order.contains("asc")) {
+            Collections.reverse(posts);
         }
 
         return posts;
@@ -75,8 +84,10 @@ public class ProductPostServiceImpl implements ProductPostService {
     }
 
     @Override
-    public List<ProductPostData> getProductPostsByUser(UUID userId) {
-        var posts = gateway.getProductPostsByUser(userId);
+    public List<ProductPostData> getProductPostsByUser(UUID userId, String order) {
+        order = (order == null || order.isBlank()) ? "date-desc" : order;
+
+        var posts = gateway.getProductPostsByUser(userId, order);
 
         if (posts == null || posts.size() == 0) {
             throw new NotFoundException("List is empty");
@@ -99,8 +110,10 @@ public class ProductPostServiceImpl implements ProductPostService {
     }
 
     @Override
-    public List<ProductPostData> getPromoProductPostsByUser(UUID userId) {
-        var posts = gateway.getProductPostsByUser(userId);
+    public List<ProductPostData> getPromoProductPostsByUser(UUID userId, String order) {
+        order = (order == null || order.isBlank()) ? "date-desc" : order;
+
+        var posts = gateway.getProductPostsByUser(userId, order);
 
         if (posts == null || posts.size() == 0) {
             throw new NotFoundException("List is empty");

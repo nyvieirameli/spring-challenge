@@ -24,11 +24,11 @@ public class ProductPostController {
     }
 
     @GetMapping
-    public ResponseEntity<ResponseDTO<List<ProductPostData>>> findAllProductPosts() {
+    public ResponseEntity<ResponseDTO<List<ProductPostData>>> findAllProductPosts(@RequestParam(value = "order", required = false) String order) {
         var response = new ResponseDTO<List<ProductPostData>>();
 
         try {
-            var posts = postService.getAllProductPosts();
+            var posts = postService.getAllProductPosts(order);
 
             response.setData(posts);
             response.setHttpStatus(HttpStatus.OK);
@@ -159,11 +159,13 @@ public class ProductPostController {
     }
 
     @GetMapping("/{userId}/list")
-    public ResponseEntity<ResponseDTO<List<ProductPostData>>> findProductPostsByUser(@PathVariable UUID userId) {
+    public ResponseEntity<ResponseDTO<List<ProductPostData>>> findProductPostsByUser(
+            @PathVariable UUID userId,
+            @RequestParam(value = "order", required = false) String order) {
         var response = new ResponseDTO<List<ProductPostData>>();
 
         try {
-            var posts = postService.getProductPostsByUser(userId);
+            var posts = postService.getProductPostsByUser(userId, order);
 
             response.setData(posts);
             response.setHttpStatus(HttpStatus.OK);
@@ -213,11 +215,13 @@ public class ProductPostController {
     }
 
     @GetMapping("/{userId}/list/promo")
-    public ResponseEntity<ResponseDTO<List<ProductPostData>>> findPromoProductPostsByUser(@PathVariable UUID userId) {
+    public ResponseEntity<ResponseDTO<List<ProductPostData>>> findPromoProductPostsByUser(
+            @PathVariable UUID userId,
+            @RequestParam(value = "order", required = false) String order) {
         var response = new ResponseDTO<List<ProductPostData>>();
 
         try {
-            var posts = postService.getPromoProductPostsByUser(userId);
+            var posts = postService.getPromoProductPostsByUser(userId, order);
 
             response.setData(posts);
             response.setHttpStatus(HttpStatus.OK);

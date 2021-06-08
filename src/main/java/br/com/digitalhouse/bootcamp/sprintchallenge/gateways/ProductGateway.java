@@ -22,7 +22,7 @@ public interface ProductGateway {
     ProductPostData getProductPostById(UUID id);
     ProductPostData createNewProductPost(ProductPostData postData, UUID productId);
     ProductPostData updateProductPostById(ProductPostRequestDTO request, UUID id);
-    List<ProductPostData> getProductPostsByUser(UUID userId);
+    List<ProductPostData> getProductPostsByUser(UUID userId, String order);
     List<ProductPostData> getProductPostsByFollowedUsersByUserId(UUID userId, String order);
     Long countPromoProductPostsByUser(UUID userId);
 }

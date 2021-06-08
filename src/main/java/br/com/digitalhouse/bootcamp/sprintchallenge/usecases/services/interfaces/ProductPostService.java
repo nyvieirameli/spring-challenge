@@ -8,12 +8,12 @@ import java.util.UUID;
 
 public interface ProductPostService {
 
-    List<ProductPostData> getAllProductPosts();
+    List<ProductPostData> getAllProductPosts(String order);
     ProductPostData getProductPostById(UUID id);
     ProductPostData createNewProductPost(ProductPostRequestDTO request);
     ProductPostData updateProductPostById(ProductPostRequestDTO request, UUID id);
-    List<ProductPostData> getProductPostsByUser(UUID userId);
+    List<ProductPostData> getProductPostsByUser(UUID userId, String order);
     List<ProductPostData> getProductPostsByFollowedUsersByUserId(UUID userId, String order);
-    List<ProductPostData> getPromoProductPostsByUser(UUID userId);
+    List<ProductPostData> getPromoProductPostsByUser(UUID userId, String order);
     Long countPromoProductPostsByUser(UUID userId);
 }

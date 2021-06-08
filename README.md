@@ -10,6 +10,9 @@ Desafio prático do bootcamp, módulo 8, SocialMeli. O objetivo é: testar tudo 
 ```
 2. rodar o projeto pelo IntelliJ IDEA
 
+## Modelagem
+A modelagem pode ser encontrada acessando o link: https://tinyurl.com/266dekef
+
 ## Casos de Uso
 
 ### US0001 - Ser capaz de realizar a ação de “Follow” (seguir) a um determinado vendedor
@@ -482,6 +485,8 @@ Habilitado em :
 ```
 GET
 /products/posts/followed/{{buyerId}}/list
+/products/posts/{{sellerId}}/list
+/products/posts/{{sellerId}}/list/promo
 ```
 
 GET Exemplos:
